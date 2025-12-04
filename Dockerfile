@@ -3,9 +3,15 @@ FROM nginx:latest
 
 ARG CONF_TYPE=default
 
-# Adding wget to the container, so we can run Coolify's Healthcheck
+# Adding wget and network diagnostic tools to the container
 RUN apt update \
   && apt install -y wget \
+    iproute2 \
+    net-tools \
+    iputils-ping \
+    dnsutils \
+    traceroute \
+    curl \
   && rm -rf /var/lib/apt/lists/*
 
 # Copy the custom Nginx configuration file to the container
